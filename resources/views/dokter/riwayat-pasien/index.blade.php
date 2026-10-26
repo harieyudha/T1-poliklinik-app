@@ -73,6 +73,9 @@
                     </tbody>
 
                 </table>
+                <div class="mt-4">
+                     {{ $riwayatPasien->links() }}
+                </div>
             </div>
 
         </div>

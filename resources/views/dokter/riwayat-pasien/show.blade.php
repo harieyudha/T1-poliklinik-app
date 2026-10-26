@@ -64,7 +64,9 @@
             </div>
         </div>
 
-        {{-- Obat yang Diresepkan --}}
+        {{-- Obat yang Diresepkan --}} 
+        Obat yang Diresepkan
+<span class="text-sm font-normal text-slate-500">({{ $jumlahObat }} obat diresepkan)</span>
         <div class="card bg-base-100 shadow-sm rounded-2xl border border-slate-200">
             <div class="card-body p-0">
                 <div class="px-6 py-4 border-b border-slate-200">

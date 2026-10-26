@@ -17,21 +17,24 @@ class RiwayatPasienController extends Controller
             'daftarPoli.pasien',
             'daftarPoli.jadwalPeriksa.dokter',
             'detailPeriksas.obat'
-        ])->orderBy('tgl_periksa', 'desc')->get();
+        ])->orderBy('tgl_periksa', 'desc')->paginate(10);
 
         return view('dokter.riwayat-pasien.index', compact('riwayatPasien'));
     }
 
     public function show($id)
-    {
-        $periksa = Periksa::whereHas('daftarPoli.jadwalPeriksa', function($query) {
-            $query->where('id_dokter', Auth::id());
-        })->with([
-            'daftarPoli.pasien',
-            'daftarPoli.jadwalPeriksa.dokter.poli',
-            'detailPeriksas.obat'
-        ])->findOrFail($id);
+{
+    $periksa = Periksa::whereHas('daftarPoli.jadwalPeriksa', function($query) {
+        $query->where('id_dokter', Auth::id());
+    })->with([
+        'daftarPoli.pasien',
+        'daftarPoli.jadwalPeriksa.dokter.poli',
+        'detailPeriksas.obat'
+    ])->findOrFail($id);
 
-        return view('dokter.riwayat-pasien.show', compact('periksa'));
-    }
+    // Hitung jumlah obat yang diresepkan
+    $jumlahObat = $periksa->detailPeriksas->count();
+
+    return view('dokter.riwayat-pasien.show', compact('periksa', 'jumlahObat'));
+}
 }
