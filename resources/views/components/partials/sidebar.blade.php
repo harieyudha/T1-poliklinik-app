@@ -134,6 +134,8 @@
 </div>
 @endif
 
+</div> 
+
     {{-- ================= LOGOUT ================= --}}
     <div class="p-4 border-t border-white/10">
         <form method="POST" action="/logout">
